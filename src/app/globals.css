@@ -66,11 +66,48 @@
   }
 }
  
+ @font-face {
+  font-family:circularbold; ;
+  src: url('../../public/font/CircularStd-Bold.otf');
+  font-weight: bold;
+  font-style: normal;
+ }
+ @font-face {
+  font-family:book; ;
+  src: url('../../public/font/CircularStd-Book.otf');
+  font-weight: normal;
+  font-style: normal;
+ }
+ @font-face {
+  font-family:cirmedium; ;
+  src: url('../../public/font/CircularStd-Medium.otf');
+  font-weight: 700;
+  font-style: normal;
+ }
+
+
+
+
 @layer base {
   * {
     @apply border-border;
+   
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .font-regular {
+    font-family: 'book';
+    font-weight: normal;
+  }
+
+  .font-medium {
+    font-family: 'cirmedium';
+    font-weight: 700;
+  }
+
+  .font-bold {
+    font-family: 'circularbold';
+    font-weight: bold;
   }
 }
