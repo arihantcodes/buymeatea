@@ -1,8 +1,15 @@
+"use client";
 import Link from "next/link";
-import React from "react";
 import Image from "next/image";
+import React, { useState } from "react";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
+  const [isopen, setIsopen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsopen(!isopen);
+  };
+
   return (
     <>
       {/* Desktop Navbar */}
@@ -42,22 +49,50 @@ const Navbar = () => {
       </div>
 
       {/* Mobile and Tablet Sidebar */}
-      <div className="lg:hidden flex justify-between items-center mt-4">
-        <div>
-          <button
-           
-            className="text-xl font-bold ml-5"
-          >
-            ☰
-          </button>
+      <div className="lg:hidden justify-between flex items-center   ">
+        <div className="lg:hidden flex  items-center mt-4">
+          <div>
+            <button onClick={toggleSidebar} className="text-xl font-bold ml-5">
+              ☰
+            </button>
+          </div>
+          <div>
+            <Link href="/">
+              <Image src="/cup.svg" alt="logo" width={50} height={50} />
+            </Link>
+          </div>
+          {isopen && (
+            <div className="lg:hidden fixed inset-0 bg-white z-50">
+              <div className="flex justify-end p-4">
+                <button onClick={toggleSidebar} className="text-black">
+                  ✖
+                </button>
+              </div>
+              <div className="flex flex-col items-center text-black font-regular">
+                <Link href="/faq" className="py-2 ">
+                  FAQ
+                </Link>
+                <Link href="/" className="py-2 ">
+                  WALL OF ❤️
+                </Link>
+                <Link href="/" className="py-2 ">
+                  HELP CENTER
+                </Link>
+                {/* Add more links as needed */}
+              </div>
+            </div>
+          )}
         </div>
-        <div>
-          <Link href="/">
-            <Image src="/logo.svg" alt="logo" width={120} height={18} />
-          </Link>
-        </div>
-        <div>
-         
+        <div className="mt-4">
+        <Link href="/" className="font-bold p-2">
+          SIGN IN
+        </Link>
+        <Link
+          href="/"
+          className="font-bold  bg-[#C4822E] text-white p-2 rounded-xl"
+        >
+           SIGN UP
+        </Link>
         </div>
       </div>
     </>
