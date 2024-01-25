@@ -1,10 +1,44 @@
-import { Accordion } from "@radix-ui/react-accordion";
+import Star from "@/components/Star";
+import React from "react";
 import Image from "next/image";
+import { buttonVariants } from "@/components/ui/button"
+import Link from "next/link";
 
-export default function Home() {
+const page = () => {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 ">
-      
-    </main>
+    <>
+      <div className="flex justify-evenly items-center flex-col">
+        <div className="flex  items-center flex-col">
+          <div className="flex flex-col md:flex-row items-center gap-1 mb-5 mt-5">
+            <div className="flex">
+              <Star />
+            </div>
+            <h1 className="font-regular  text-sm md:text-xl">
+              Appreciated by over 1,000+ creators.
+            </h1>
+          </div>
+          <h1 className="font-bold text-4xl  md:text-8xl ">
+            Monetize your
+            <br />
+            creative efforts
+          </h1>
+          <h3 className="flex items-center font-regular text-gray-500 text-xs lg:text-lg">
+            Accept Donations Via{" "}
+            <span>
+              <Image src="/upi.svg" height={40} width={40} alt="upi"></Image>
+            </span>{" "}
+            Direct To Your Account
+          
+          </h3>
+            <h3 className="font-regular  text-xs lg:text-lg text-gray-500 ">It’s easier than you think.</h3>
+        </div>
+       <div className="mt-8 mb-6">
+       <Link href="/" className={buttonVariants({ variant: "default" , size:"lg"})}>Start your Tapri</Link>
+       </div>
+
+      </div>
+    </>
   );
-}
+};
+
+export default page;
