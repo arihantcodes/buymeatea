@@ -8,7 +8,7 @@ import Donation from "@/components/Donation";
 const page = () => {
   return (
     <>
-      <div className="flex justify-evenly items-center md:mt-16 flex-col">
+      <div className="flex justify-evenly items-center md:mt-16 flex-col select-none">
         <div className="flex  items-center flex-col">
           <div className="flex flex-col md:flex-row  items-center gap-1 mb-5 md:mb-12 mt-9">
             <div className="flex">
@@ -36,7 +36,7 @@ const page = () => {
         </div>
         <div className="mt-8 mb-6">
           <Link
-            href="/"
+            href="/auth/signin"
             className={buttonVariants({ variant: "default", size: "lg" })}
           >
             Start your Tapri
