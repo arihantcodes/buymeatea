@@ -13,7 +13,7 @@ const Navbar: React.FC = () => {
   return (
     <>
       {/* Desktop Navbar */}
-      <div className="hidden lg:flex justify-evenly items-center lg:ml-4 select-none">
+      <div className="hidden lg:flex justify-evenly items-center select-none">
         <div className="mt-2">
           <Link href="/faq" className="font-bold lg:mr-5">
             FAQ
@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
             HELP CENTER
           </Link>
         </div>
-        <div className="lg:ml-16 lg:mt-2">
+        <div className=" lg:mt-2">
           <Link href="/">
             <Image src="/logo.svg" alt="logo" width={150} height={22} />
           </Link>
