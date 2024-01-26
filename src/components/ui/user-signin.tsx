@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icon";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
+import Link from "next/link";
 import { Label } from "@/components/ui/label";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
@@ -73,6 +73,8 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </span>
         </div>
       </div>
+      <div className=" flex justify-evenly">
+      <Link href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=665870045363-45r97n4h1dhdhkg9r1rfgdguoqis9msu.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fgoogle&state=qaDU5vnA_KZwG4HjeUwGlN0XuKzFxZ5_ynm3VdasRnc&code_challenge=vQLL63E0Senpc57KaoWckjAYob4fGTgmdwWPq_vSpSY&code_challenge_method=S256&service=lso&o2v=2&theme=glif&flowName=GeneralOAuthFlow" >
       <Button variant="outline" type="button" disabled={isLoading}>
         {isLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
@@ -81,6 +83,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         )}{" "}
         GitHub
       </Button>
+      </Link>
+      OR
+      <Link href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=665870045363-45r97n4h1dhdhkg9r1rfgdguoqis9msu.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fgoogle&state=qaDU5vnA_KZwG4HjeUwGlN0XuKzFxZ5_ynm3VdasRnc&code_challenge=vQLL63E0Senpc57KaoWckjAYob4fGTgmdwWPq_vSpSY&code_challenge_method=S256&service=lso&o2v=2&theme=glif&flowName=GeneralOAuthFlow" >
       <Button variant="outline" type="button" disabled={isLoading}>
         {isLoading ? (
           <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
@@ -89,6 +94,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         )}{" "}
         Google
       </Button>
+      </Link>
+      </div>
+     
     </div>
   );
 }

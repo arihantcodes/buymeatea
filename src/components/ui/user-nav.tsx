@@ -14,7 +14,7 @@ import {
     DropdownMenuShortcut,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
-  
+  import Link from "next/link"
   export function UserNav() {
     return (
       <DropdownMenu>
@@ -29,7 +29,7 @@ import {
         <DropdownMenuContent className="w-56" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">shadcn</p>
+              <p className="text-sm font-medium leading-none">Arihant Jain</p>
               <p className="text-xs leading-none text-muted-foreground">
                 m@example.com
               </p>
@@ -38,23 +38,18 @@ import {
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <DropdownMenuItem>
-              Profile
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              <Link href="/dashboard/profile">Profile</Link>
+             
             </DropdownMenuItem>
-            <DropdownMenuItem>
-              Billing
-              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              Settings
-              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>New Team</DropdownMenuItem>
+           
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
+          <Link href="/">
+
             Log out
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          </Link>
+            
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

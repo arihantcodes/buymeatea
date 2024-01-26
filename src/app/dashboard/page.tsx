@@ -19,7 +19,7 @@ import TeamSwitcher from "@/components/ui/team-switcher";
 import { UserNav } from "@/components/ui/user-nav";
 
 export const metadata: Metadata = {
-  title: "Dashboard",
+  title: "Ek chai pilade Dashboard",
   description: "Example dashboard app built using the components.",
 };
 
@@ -31,8 +31,10 @@ export default function DashboardPage() {
           <div className="flex h-16 items-center px-4">
             <TeamSwitcher />
             <MainNav className="mx-6 md:flex hidden" />
-            <div className="ml-auto md:flex hidden items-center space-x-4">
-              <Search />
+            <div className="ml-auto flex  items-center space-x-4">
+             <div className="md:flex hidden ml-auto  items-center  ">
+             <Search />
+             </div>
               <UserNav />
             </div>
           </div>
@@ -79,7 +81,7 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">$45,231.89</div>
+                    <div className="text-2xl font-bold">₹ 4750 </div>
                     <p className="text-xs text-muted-foreground">
                       +20.1% from last month
                     </p>
@@ -88,7 +90,7 @@ export default function DashboardPage() {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Arihant
+                      This Month Revenue
                     </CardTitle>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +108,7 @@ export default function DashboardPage() {
                     </svg>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+2350</div>
+                    <div className="text-2xl font-bold">₹2350</div>
                     <p className="text-xs text-muted-foreground">
                       +180.1% from last month
                     </p>
