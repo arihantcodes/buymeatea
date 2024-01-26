@@ -36,11 +36,11 @@ const Navbar: React.FC = () => {
             placeholder="Search Creators"
             className="bg-[#FAF2E8] lg:mr-8 lg:h-11 lg:p-4 outline-none rounded-xl font-regular"
           />
-          <Link href="/" className="font-bold lg:mr-5">
+          <Link href="/auth/signin" className="font-bold lg:mr-5">
             SIGN IN
           </Link>
           <Link
-            href="/"
+            href="/auth/signup"
             className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3 rounded-xl"
           >
             SIGN UP
