@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import Home from "@/components/Home";
 
-
-
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Ek chai pilade",
@@ -19,10 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="relative">
-        
         {children}
-     
-        </body>
+        <Toaster />
+      </body>
     </html>
   );
 }
