@@ -94,7 +94,7 @@ import { useState } from "react"
                onClick={getUserDetails}
                >
              {data === "Profile" ? "Profile..." : 
-             <Link href={`/dashboard/profile/${data}`}>{data}</Link>}
+             <Link href={`/dashboard/updateprofile/${data}`}>{data}</Link>}
               </button>
              
             </DropdownMenuItem>

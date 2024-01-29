@@ -1,7 +1,46 @@
+"use client"
 import { UserCircleIcon } from "@heroicons/react/24/solid";
-import {Button} from "@/components/ui/button";  
+import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Profile() {
+  const router = useRouter();
+  const [profileData, setProfileData] = useState({
+    _id: '',
+    // Add other profile fields as needed
+    username: '',
+    upi: '',
+    about: '',
+  });
+
+  const handleChange = (e:any) => {
+    setProfileData({
+      ...profileData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e:any) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("/api/profile", profileData);
+
+      
+      if (response.status === 200) {
+        console.log('Profile updated successfully:', response.data);
+      } else {
+        console.log('Error:', response.data.error);
+      }
+      router.push(`/dashboard/profile/${profileData.username}`);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <form className="">
       <div className="space-y-12 flex justify-evenly items-center mt-28 flex-col">
@@ -13,7 +52,7 @@ export default function Profile() {
             This information will be displayed publicly so be careful what you
             share.
           </p>
-          
+
           <div className="col-span-full">
             <label
               htmlFor="photo"
@@ -54,6 +93,8 @@ export default function Profile() {
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="janesmith"
+                    value={profileData.username}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -77,6 +118,8 @@ export default function Profile() {
                     autoComplete="upi"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="example@paytm"
+                    value={profileData.upi}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -96,6 +139,8 @@ export default function Profile() {
                   rows={3}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset  sm:text-sm sm:leading-6"
                   defaultValue={""}
+                  value={profileData.about}
+                  onChange={handleChange}
                 />
               </div>
               <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -107,9 +152,10 @@ export default function Profile() {
       </div>
 
       <div className="mt-6 flex items-center justify-center gap-x-6">
-       
-        <Button variant="outline" >Cancel</Button>
-        <Button variant="destructive">Update Profile</Button>
+        <Button variant="outline">Cancel</Button>
+        <Button variant="destructive" onClick={handleSubmit}>
+          Update Profile
+        </Button>
       </div>
     </form>
   );
