@@ -44,5 +44,5 @@ Enable features such as commenting, sharing, and a referral program to enhance c
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/EkChaiPilade.git
+   git clone https://github.com/arihantdotcom/ekchaipilade.git
    cd EkChaiPilade
