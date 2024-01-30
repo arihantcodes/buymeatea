@@ -34,7 +34,7 @@ export default function Profile() {
       } else {
         console.log('Error:', response.data.error);
       }
-      router.push(`/dashboard/profile/${profileData.username}`);
+      router.push("/dashboard");
       console.log(response);
     } catch (error) {
       console.error(error);
@@ -84,7 +84,7 @@ export default function Profile() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset  sm:max-w-md">
                   <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-                    ekchaipilade/
+                    ekchaipilade/${}
                   </span>
                   <input
                     type="text"
@@ -152,9 +152,9 @@ export default function Profile() {
       </div>
 
       <div className="mt-6 flex items-center justify-center gap-x-6">
-        <Button variant="outline">Cancel</Button>
+        
         <Button variant="destructive" onClick={handleSubmit}>
-          Update Profile
+          Create Profile
         </Button>
       </div>
     </form>

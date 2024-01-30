@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function UpdateProfile({ initialProfileData }: any) {
   const router = useRouter();
@@ -57,6 +58,7 @@ export default function UpdateProfile({ initialProfileData }: any) {
       console.log(response);
     } catch (error) {
       console.error('Error updating profile:', error);
+      router.push("/dashboard")
     }
   };
 
@@ -94,7 +96,9 @@ export default function UpdateProfile({ initialProfileData }: any) {
       </div>
 
       <div className="mt-6 flex items-center justify-center gap-x-6">
-        <Button variant="outline">Cancel</Button>
+      <Link href="/dashboard">
+      <Button variant="outline">Cancel</Button>
+      </Link>
         <Button variant="destructive" onClick={handleSubmit}>
           Update Profile
         </Button>

@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <div className="flex justify-center flex-col items-center mb-12">
       <Image src="/notfound.svg" height={900} width={900} alt="" />
-     <Link href="/">
+     <Link href="/dashboard">
      <Button variant="destructive">Back To Home</Button>
      </Link>
 

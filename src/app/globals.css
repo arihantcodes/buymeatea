@@ -110,4 +110,8 @@
 
 
 
-
+.blur {
+  filter: blur(5px); /* Adjust the blur amount as needed */
+  height:500px;
+  width:500px;
+}

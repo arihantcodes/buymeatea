@@ -10,7 +10,7 @@ import axios from "axios";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
+import Link from "next/link"
 import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast"
 
@@ -29,7 +29,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       toast({
         description: "Account Create Successfully",
       })
-      router.push("/dashboard/profile");
+      router.push(`/dashboard/profile/&{username}`);
     } catch (error) {
       console.log("create account failed")
       toast({
@@ -123,22 +123,29 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           </span>
         </div>
       </div>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        {isLoading ? (
-          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.gitHub className="mr-2 h-4 w-4" />
-        )}{" "}
-        GitHub
-      </Button>
-      <Button variant="outline" type="button" disabled={isLoading}>
-        {isLoading ? (
-          <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-        ) : (
-          <Icons.google className="mr-2 h-4 w-4" />
-        )}{" "}
-        Google
-      </Button>
+      <div className="flex justify-evenly">
+      <Link href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=665870045363-45r97n4h1dhdhkg9r1rfgdguoqis9msu.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fgoogle&state=qaDU5vnA_KZwG4HjeUwGlN0XuKzFxZ5_ynm3VdasRnc&code_challenge=vQLL63E0Senpc57KaoWckjAYob4fGTgmdwWPq_vSpSY&code_challenge_method=S256&service=lso&o2v=2&theme=glif&flowName=GeneralOAuthFlow">
+          <Button variant="outline" type="button" disabled={isLoading}>
+            {isLoading ? (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Icons.gitHub className="mr-2 h-4 w-4" />
+            )}{" "}
+            GitHub
+          </Button>
+        </Link>
+        OR
+        <Link href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=665870045363-45r97n4h1dhdhkg9r1rfgdguoqis9msu.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fgoogle&state=qaDU5vnA_KZwG4HjeUwGlN0XuKzFxZ5_ynm3VdasRnc&code_challenge=vQLL63E0Senpc57KaoWckjAYob4fGTgmdwWPq_vSpSY&code_challenge_method=S256&service=lso&o2v=2&theme=glif&flowName=GeneralOAuthFlow">
+          <Button variant="outline" type="button" disabled={isLoading}>
+            {isLoading ? (
+              <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+            ) : (
+              <Icons.google className="mr-2 h-4 w-4" />
+            )}{" "}
+            Google
+          </Button>
+        </Link>
+    </div>
     </div>
   );
 }
