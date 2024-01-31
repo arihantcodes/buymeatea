@@ -84,11 +84,11 @@ const Navbar: React.FC = () => {
           )}
         </div>
         <div className="mt-4">
-        <Link href="/" className="font-bold p-2">
+        <Link href="/signin" className="font-bold p-2">
           SIGN IN
         </Link>
         <Link
-          href="/"
+          href="/signup"
           className="font-bold  bg-[#C4822E] text-white p-2 rounded-xl"
         >
            SIGN UP
