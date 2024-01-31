@@ -40,6 +40,13 @@ Enable features such as commenting, sharing, and a referral program to enhance c
 - **Real-time Updates:** WebSocket.
 - **Deployment:** Vercel.
 
+
+## Project Architecture
+
+![Logo](/public/diagram-export-31-01-2024-13_01_31.png)
+
+
+
 ## Getting Started
 
 1. Clone the repository:
