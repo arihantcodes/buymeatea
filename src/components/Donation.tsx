@@ -11,12 +11,10 @@ const Donation = () => {
       <div className="bg-[#FAF2E8] flex flex-col items-center p-4 md:w-full w-9/12 lg:p-12 select-none rounded-2xl">
         <div className="text-center">
           <h1 className="text-center font-medium text-gray-500">DONATIONS</h1>
-          <h1 className="font-bold text-sm md:text-5xl">
-            Make it simple for your audience
-          </h1>
+          <h1 className="font-bold text-sm md:text-5xl">Make it simple for your audience</h1>
           <h1 className="font-bold text-xl md:text-5xl">to express gratitude.</h1>
           <p className="font-regular text-gray-700 mt-4">
-            "Ek chai pilade" makes it fun and simple to show support. <br /> In
+            Ek chai pilade makes it fun and simple to show support. <br /> In
             just a few taps, your fans can make a payment and leave a message.
           </p>
         </div>
