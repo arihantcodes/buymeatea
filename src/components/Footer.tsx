@@ -18,13 +18,13 @@ const Footer = () => {
         </div>
 
         <div className="flex justify-center gap-5 mb-4">
-          <Link href="">
+          <Link href="https://twitter.com/Arihantdotcom">
             <Image height={20} width={20} src="/x.svg" alt="" />
           </Link>
-          <Link href="">
-            <Image height={20} width={20} src="/insta.svg" alt="" />
+          <Link href="https://github.com/arihantdotcom">
+            <Image height={20} width={20} src="/github.svg" alt="" />
           </Link>
-          <Link href="">
+          <Link href="https://www.linkedin.com/in/arihantdotcom/">
             <Image height={20} width={20} src="/linkedin.svg" alt="" />
           </Link>
         </div>

@@ -11,7 +11,7 @@ const Buychai = () => {
   const [amount, setAmount] = useState(20);
   const [isActive, setIsActive] = useState(false);
   const [generatedQRCode, setGeneratedQRCode] = useState<string | null>(null);
-  const [upiId, setUpiId] = useState("9516677164@paytm");
+  const [upiId, setUpiId] = useState("jainari1208@paytm");
 
   useEffect(() => {
     // Set the default amount to ₹20 when the component mounts
@@ -131,7 +131,7 @@ const Buychai = () => {
           Buy Chai ₹{amount}
         </Button>
         {generatedQRCode && (
-          <div className="absolute  m-32  ">
+          <div className="absolute m-12 md:m-32  ">
             <QRCode value={generatedQRCode} size={200} />
           </div>
         )}
