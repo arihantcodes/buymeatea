@@ -39,7 +39,7 @@ const home = () => {
         </div>
         <div className="mt-8 mb-6">
           <Link
-            href="/signin"
+            href="/signup"
             className={buttonVariants({ variant: "default", size: "lg" })}
           >
             Start your Tapri
