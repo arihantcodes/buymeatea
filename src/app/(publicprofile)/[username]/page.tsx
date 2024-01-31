@@ -11,11 +11,7 @@ const Page = ({params}:any) => {
           <div className="flex flex-wrap mb-6 xl:flex-nowrap">
             <div className="mb-5 mr-5">
               <div className="relative inline-block shrink-0 rounded-2xl">
-                <img
-                  className="inline-block shrink-0 rounded-2xl w-[80px] h-[80px] lg:w-[160px] lg:h-[160px]"
-                  src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/riva-dashboard-tailwind/img/avatars/avatar1.jpg"
-                  alt="image"
-                />
+               
                 <div className="group/tooltip relative">
                   <span className="w-[15px] h-[15px] absolute bg-success rounded-full bottom-0 end-0 -mb-1 -mr-2 border border-white"></span>
                   <span className="text-xs absolute z-10 transition-opacity duration-300 ease-in-out px-3 py-2 whitespace-nowrap text-center transform bg-white rounded-2xl shadow-sm bottom-0 -mb-2 start-full ml-4 font-medium text-secondary-inverse group-hover/tooltip:opacity-100 opacity-0 block">

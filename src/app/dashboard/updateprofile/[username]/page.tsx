@@ -34,8 +34,7 @@ export default function UpdateProfile({ initialProfileData }: any) {
         about: initialProfileData.about || '',
       });
     }
-  }, [initialProfileData]);
-
+  }, [initialProfileData, profileData]);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
