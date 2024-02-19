@@ -19,9 +19,9 @@ You can open a new issue with this [issue form](https://github.com/ekchaipiladeh
 
 ### Requirements
 
-- Node.js v20.8.1 (LTS)
+- Node.js v18.17.1 or Higher
 
-  - To install Node.js v20.8.1 (LTS) through NVM (Node Version Manager), follow these steps:
+  - To install Node.js v18.17.1  through NVM (Node Version Manager), follow these steps:
 
     1. Open your terminal.
 
@@ -45,21 +45,20 @@ You can open a new issue with this [issue form](https://github.com/ekchaipiladeh
        ```
 
 - [MongoDB](https://www.mongodb.com/try/download/community)
-- Redis. To install Redis on your Operating System, please follow the below guides
-  - [To install Redis on Windows](https://redis.io/docs/getting-started/installation/install-redis-on-windows/)
-  - [To install Redis on Linux](https://redis.io/docs/getting-started/installation/install-redis-on-linux/)
-  - [To install Redis on macOS](https://redis.io/docs/getting-started/installation/install-redis-on-mac-os/)
-- **(Optional)** pnpm - Needed if you want to install new packages
-- **(Optional)** localstack (required only in S3 related modules)
-
+-
 ### Setup the project
 
 The project is a monorepo, meaning that it is a collection of multiple packages managed in the same repository.
 
-To learn more about the project structure and running the project locally, please have a look [here](https://docs.ekchaipilade.co/community-support/introduction#run-ekchaipilade-locally).
-After cloning your fork, you will need to run the `npm run setup:project` command to install and build all dependencies.
+To run the project follow these commands
+```
+git clone "your forkedone link"
 
-To learn a detailed guide on running the project locally, checkout our guide on [how to run ekchaipilade in local machine](https://docs.ekchaipilade.co/community/run-in-local-machine).
+cd ekchaipilade
+npm install
+npm run dev
+```
+
 
 ## Missing a Feature?
 
