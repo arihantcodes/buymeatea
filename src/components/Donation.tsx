@@ -42,7 +42,7 @@ const Donation = () => {
             </div>
           </div>
           <div className="mt-4 md:mt-7 bg-[#FAF2E8] flex p-2 rounded-lg mx-2 md:mx-6 h-20 md:h-32 font-bold text-gray-800">
-            say something....
+            Leave a message ...
           </div>
           <Button
             variant="default"
