@@ -15,6 +15,9 @@ export default function Profile() {
     about: '',
   });
 
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e:any) => {
     setProfileData({
       ...profileData,
@@ -26,6 +29,7 @@ export default function Profile() {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const response = await axios.post("/api/profile", profileData);
 
       
@@ -38,12 +42,14 @@ export default function Profile() {
       console.log(response);
     } catch (error) {
       console.error(error);
+    }finally{
+      setLoading(false);
     }
   };
 
   return (
     <form className="">
-      <div className="space-y-12 flex justify-evenly items-center mt-28 flex-col">
+      <div className="space-y-12 flex justify-evenly items-center mt-10 flex-col">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-lg font-bold leading-7 text-gray-900">
             Profile
@@ -83,7 +89,7 @@ export default function Profile() {
               </label>
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset  sm:max-w-md">
-                  <span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
+                  <span className="flex select-none  items-center pl-3 text-gray-500 sm:text-sm">
                     ekchaipilade/${}
                   </span>
                   <input
@@ -91,7 +97,7 @@ export default function Profile() {
                     name="username"
                     id="username"
                     autoComplete="username"
-                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    className="block select-none  flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 focus:outline-none sm:text-sm sm:leading-6"
                     placeholder="janesmith"
                     value={profileData.username}
                     onChange={handleChange}
@@ -116,7 +122,7 @@ export default function Profile() {
                     name="upi"
                     id="upi"
                     autoComplete="upi"
-                    className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+                    className="block focus:outline-none flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="example@paytm"
                     value={profileData.upi}
                     onChange={handleChange}
@@ -128,7 +134,7 @@ export default function Profile() {
             <div className="col-span-full">
               <label
                 htmlFor="about"
-                className="block text-sm font-medium leading-6 text-gray-900"
+                className="block focus:ring-0 focus:outline-none text-sm font-medium leading-6 text-gray-900"
               >
                 About
               </label>
@@ -141,20 +147,24 @@ export default function Profile() {
                   defaultValue={""}
                   value={profileData.about}
                   onChange={handleChange}
+                  placeholder="Your Bio ..."
+                  
                 />
               </div>
-              <p className="mt-3 text-sm leading-6 text-gray-600">
-                Write a few sentences about yourself.
-              </p>
+              
+              <br />
+              <h1>After creating profile you will be redirect to Dashboard so be patience ...</h1>
             </div>
           </div>
         </div>
+        <h2></h2>
       </div>
-
-      <div className="mt-6 flex items-center justify-center gap-x-6">
+      
+      <div className="mt-4 flex items-center justify-center gap-x-6">
+        
         
         <Button variant="destructive" onClick={handleSubmit}>
-          Create Profile
+        {loading ? "Processing..." : "Create Profile"}
         </Button>
       </div>
     </form>
