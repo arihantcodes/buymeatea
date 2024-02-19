@@ -1,11 +1,7 @@
-import {connect} from "@/dbconfig/dbconfig";
+import { connect } from "@/dbconfig/dbconfig";
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-
-
-
-
 
 connect();
 
@@ -38,14 +34,11 @@ export async function POST(Request: NextRequest) {
 
     console.log(saveduser);
 
-    return NextResponse.json(
-      { message: "User created successfully",
+    return NextResponse.json({
+      message: "User created successfully",
       success: true,
-      saveduser
-    
-    },
-     
-    );
+      saveduser,
+    });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
