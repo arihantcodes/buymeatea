@@ -38,6 +38,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
       { status: 200 }
     );
   } catch (error: any) {
+    console.log("Error While Updating Profie")
     console.error("Error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

@@ -30,6 +30,7 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error: any) {
+    console.log("Error While Creating Profile!!")
     console.error("Error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
