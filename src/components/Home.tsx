@@ -1,11 +1,12 @@
 import Star from "@/components/Star";
 import React from "react";
 import Image from "next/image";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import Donation from "@/components/Donation";
 import Navbar from "./Navbar";
 import Footer  from "./Footer";
+import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
 
 const home = () => {
   return (
@@ -38,12 +39,15 @@ const home = () => {
           </h3>
         </div>
         <div className="mt-8 mb-6">
-          <Link
-            href="/signup"
-            className={buttonVariants({ variant: "default", size: "lg" })}
+        <Button
+           
+            className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3 ml-4 "
           >
-            Start your Tapri
-          </Link>
+         <RegisterLink>Start your Tapri</RegisterLink>
+
+          </Button>
+            
+         
           <h3 className="font-bold mt-5 text-gray-500">100% commission Free</h3>
         </div>
         {/* home screen page end */}

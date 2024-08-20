@@ -2,7 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
-
+import {RegisterLink, LoginLink} from "@kinde-oss/kinde-auth-nextjs/components";
+import { Button } from "./ui/button";
 const Navbar: React.FC = () => {
   const [isopen, setIsopen] = useState(false);
 
@@ -36,15 +37,16 @@ const Navbar: React.FC = () => {
             placeholder="Search Creators"
             className="bg-[#FAF2E8] lg:mr-8 lg:h-11 lg:p-4 outline-none rounded-xl font-regular"
           />
-          <Link href="/signin" className="font-bold lg:mr-5">
-            SIGN IN
-          </Link>
-          <Link
-            href="/signup"
-            className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3 rounded-xl"
+          <Button variant={"outline"}  className="font-bold lg:mr-5">
+          <LoginLink>Sign in</LoginLink>
+          </Button>
+          <Button
+           
+            className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3"
           >
-            SIGN UP
-          </Link>
+         <RegisterLink>Sign up</RegisterLink>
+
+          </Button>
         </div>
       </div>
 
@@ -84,15 +86,16 @@ const Navbar: React.FC = () => {
           )}
         </div>
         <div className="mt-4">
-        <Link href="/signin" className="font-bold p-2">
-          SIGN IN
-        </Link>
-        <Link
-          href="/signup"
-          className="font-bold  bg-[#C4822E] text-white p-2 rounded-xl"
-        >
-           SIGN UP
-        </Link>
+        <Button variant={"outline"}  className="font-bold lg:mr-5">
+          <LoginLink>Sign in</LoginLink>
+          </Button>
+          <Button
+           
+            className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3 ml-4 "
+          >
+         <RegisterLink>Sign up</RegisterLink>
+
+          </Button>
         </div>
       </div>
     </>
