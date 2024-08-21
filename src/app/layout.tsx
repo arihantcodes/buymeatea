@@ -5,7 +5,7 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "Ek chai pilade",
+  title: "Buy Me A Tea",
   description: "Developed by Aman jain & Arihant jain ",
 };
 

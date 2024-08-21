@@ -15,6 +15,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@kinde-oss/kinde-auth-nextjs": "^2.3.6",
     "@material-tailwind/react": "^2.1.8",
+    "@prisma/client": "^5.18.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -29,7 +30,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-toast": "^1.1.5",
     "@radix-ui/react-tooltip": "^1.1.2",
-    "axios": "^1.6.7",
+    "axios": "^1.7.4",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
@@ -39,7 +40,6 @@
     "framer-motion": "^11.0.3",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.315.0",
-    "mongoose": "^8.1.1",
     "next": "14.1.0",
     "next-auth": "^4.24.5",
     "nodemon": "^3.0.3",
@@ -51,7 +51,7 @@
     "recharts": "^2.10.4",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.22.4",
+    "zod": "^3.23.8",
     "zustand": "^4.5.0"
   },
   "devDependencies": {
@@ -64,6 +64,7 @@
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8",
+    "prisma": "^5.18.0",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   }
