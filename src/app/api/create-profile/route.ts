@@ -6,7 +6,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
-  const { email, username, bio, upiId, kindeId } = await req.json();
+  const { email, username, bio, upiId, kindeId,picture } = await req.json();
 
   if (!email || !username || !upiId) {
     return NextResponse.json({ error: 'Email, username, and UPI ID are required' }, { status: 400 });
@@ -28,6 +28,7 @@ export async function POST(req: Request) {
         bio,
         kindeId,
         upiId,
+        picture
       },
     });
 

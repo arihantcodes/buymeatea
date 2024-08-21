@@ -30,17 +30,7 @@ const PriNavbar: React.FC = () => {
     <>
       {/* Desktop Navbar */}
       <div className="hidden lg:flex justify-evenly items-center select-none">
-      <div className="mt-2">
-          <Link href="/faq" className="font-bold lg:mr-5">
-            FAQ
-          </Link>
-          <Link href="/" className="font-bold lg:mr-5">
-            WALL OF ❤️
-          </Link>
-          <Link href="/" className="font-bold lg:mr-5">
-            HELP CENTER
-          </Link>
-        </div>
+      
         <div className=" lg:mt-2">
           <Link href="/" className="flex justify-center items-center">
             <Image src="/cup2.svg" alt="logo" width={50} height={22} />
@@ -59,8 +49,8 @@ const PriNavbar: React.FC = () => {
                   {user && (
                     <Image
                       src={user.picture ?? ""}
-                      width={36}
-                      height={36}
+                      width={86}
+                      height={86}
                       alt="Avatar"
                       className="overflow-hidden rounded-full"
                     />

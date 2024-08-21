@@ -22,7 +22,6 @@ export async function GET(req: Request) {
 
     return NextResponse.json(userProfile);
   } catch (error) {
-    console.error('Error fetching user profile:', error);
     return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
   }
 }

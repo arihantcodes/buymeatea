@@ -39,6 +39,7 @@ const Page = () => {
       upiId,
       email: user?.email || "",
       kindeId: user?.id || "",
+      picture: user?.picture || "",
     };
 
     const validation = profileSchema.safeParse(formData);

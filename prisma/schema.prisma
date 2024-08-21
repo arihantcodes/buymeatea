@@ -20,6 +20,7 @@ model UserProfile {
   kindeId   String
   bio       String?
   upiId     String
+  picture   String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
