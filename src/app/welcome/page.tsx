@@ -49,7 +49,7 @@ const Page = () => {
     }
 
     try {
-      const response = await axios.post("/api/create-profile", formData);
+      const response = await axios.post("/api/createprofile", formData);
       router.push("/dashboard");
       console.log(response.data);
     } catch (error) {
