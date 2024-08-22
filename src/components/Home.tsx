@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
 import Star from "@/components/Star";
 import React from "react";
 import Image from "next/image";
@@ -5,13 +7,17 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import Donation from "@/components/Donation";
 import Navbar from "./Navbar";
-import Footer  from "./Footer";
+import Footer from "./Footer";
 import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 
 const home = () => {
+  const { isAuthenticated, user, getUser } = useKindeBrowserClient();
+  const alsoUser = getUser();
+
   return (
     <>
-     <Navbar/>
+      <Navbar />
       <div className="flex justify-evenly items-center md:mt-16 flex-col select-none">
         <div className="flex  items-center flex-col">
           <div className="flex flex-col md:flex-row  items-center gap-1 mb-5 md:mb-12 mt-9">
@@ -39,16 +45,21 @@ const home = () => {
           </h3>
         </div>
         <div className="mt-8 mb-6">
-        <Button
-           
-            className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3 ml-4 "
-          >
-         <RegisterLink>Start your Tapri</RegisterLink>
+          {isAuthenticated ? (
+            <Button variant="outline" className="font-bold ml-3" size={"lg"}>
+              <Link href="/dashboard"> Dashboard </Link>
+            </Button>
+          ) : (
+            <>
+              <Button className="font-bold  bg-[#C4822E] text-white ml-3" size={"lg"}>
+                <RegisterLink postLoginRedirectURL="/welcome">
+                  Start Your Stall
+                </RegisterLink>
+              </Button>
+            </>
+          )}
 
-          </Button>
-            
-         
-          <h3 className="font-bold mt-5 text-gray-500">100% commission Free</h3>
+          <h3 className="font-bold mt-5 text-gray-500 text-center ">100% commission Free</h3>
         </div>
         {/* home screen page end */}
         <div className="mt-32 mb-9 flex justify-center flex-col items-center">
@@ -62,7 +73,7 @@ const home = () => {
           />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 };

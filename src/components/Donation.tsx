@@ -14,12 +14,12 @@ const Donation = () => {
           <h1 className="font-bold text-sm md:text-5xl">Make it simple for your audience</h1>
           <h1 className="font-bold text-xl md:text-5xl">to express gratitude.</h1>
           <p className="font-regular text-gray-700 mt-4">
-            Ek chai pilade makes it fun and simple to show support. <br /> In
+            Buy Me A Tea makes it fun and simple to show support. <br /> In
             just a few taps, your fans can make a payment and leave a message.
           </p>
         </div>
         <div className="bg-white text-gray-800 rounded-2xl lg:w-7/12 mt-8 md:mt-12 flex flex-col">
-          <h1 className="font-bold p-4">Chai Khareedo</h1>
+          <h1 className="font-bold p-4">Buy Me A Tea</h1>
           <div className="bg-[#FAF2E8] flex justify-around items-center rounded-lg mx-2 md:mx-6">
             <Image src="/cup2.svg" width={40} height={40} alt="logo" />
             <h1> ✖</h1>
@@ -49,7 +49,7 @@ const Donation = () => {
             size="lg"
             className="mx-4 md:mx-12 my-4 md:my-6 rounded-full"
           >
-            Buy Chai
+            Buy Me A Tea
           </Button>
         </div>
       </div>

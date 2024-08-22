@@ -29,7 +29,7 @@ const PriNavbar: React.FC = () => {
   return (
     <>
       {/* Desktop Navbar */}
-      <div className="hidden lg:flex justify-evenly items-center select-none">
+      <div className="hidden lg:flex justify-evenly  items-center select-none">
       <div className="mt-2">
           <Link href="/faq" className="font-bold lg:mr-5">
             FAQ
@@ -41,7 +41,7 @@ const PriNavbar: React.FC = () => {
             HELP CENTER
           </Link>
         </div>
-        <div className=" lg:mt-2">
+        <div className=" lg:mt-2 lg:mr-40">
           <Link href="/" className="flex justify-center items-center">
             <Image src="/cup2.svg" alt="logo" width={50} height={22} />
             <h1 className="font-bold text-lg">Buy Me A Tea</h1>

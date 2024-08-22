@@ -14,13 +14,26 @@ datasource db {
 }
 
 model UserProfile {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  username  String   @unique
-  kindeId   String
-  bio       String?
-  upiId     String
-  picture   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(cuid())
+  email      String   @unique
+  username   String   @unique
+  kindeId    String?
+  bio        String?
+  upiId      String?
+  picture    String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  orders     Order[]  @relation("UserOrders")
+}
+
+model Order {
+  id           String   @id
+  receipt      String
+  amount        Float
+  currency     String
+  status       String
+  userProfile  UserProfile? @relation("UserOrders", fields: [userProfileId], references: [id])
+  userProfileId String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

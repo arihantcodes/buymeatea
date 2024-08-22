@@ -111,7 +111,7 @@ const UserProfilePage = ({ params }: { params: { username: string } }) => {
                 className="rounded-full border-4 border-white"
               />
               <h1 className="text-2xl md:text-3xl font-bold">
-                {user?.upiId}
+                {user?.username}
               </h1>
             </div>
 

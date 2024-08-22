@@ -7,7 +7,7 @@ const Footer = () => {
     <>
       <div className="flex lg:justify-evenly lg:flex-row flex-col ">
         <div className="font-regular text-center mb-4">
-          <h1>© Ek chai pilade</h1>
+          <h1>© Buy Me A Tea</h1>
         </div>
 
         <div className="flex flex-wrap  justify-center text-center text-gray-600 font-regular gap-5 mb-4">
@@ -18,13 +18,13 @@ const Footer = () => {
         </div>
 
         <div className="flex justify-center gap-5 mb-4">
-          <Link href="https://twitter.com/Arihantdotcom">
+          <Link href="https://twitter.com/arihantcodes">
             <Image height={20} width={20} src="/x.svg" alt="" />
           </Link>
-          <Link href="https://github.com/arihantdotcom">
+          <Link href="https://github.com/arihantcodes">
             <Image height={20} width={20} src="/github.svg" alt="" />
           </Link>
-          <Link href="https://www.linkedin.com/in/arihantdotcom/">
+          <Link href="https://www.linkedin.com/in/arihantcodes/">
             <Image height={20} width={20} src="/linkedin.svg" alt="" />
           </Link>
         </div>
