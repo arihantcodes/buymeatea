@@ -14,7 +14,7 @@ const Footer = () => {
           <Link href="/privacy">Privacy Policy</Link>
           <Link href="/terms">Terms and Conditions</Link>
           <Link href="/refund-policy">Refund/Cancellation Policy</Link>
-          <Link href="/">Help center</Link>
+          <Link href="/help">Contact Us</Link>
         </div>
 
         <div className="flex justify-center gap-5 mb-4">
