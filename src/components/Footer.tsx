@@ -11,9 +11,9 @@ const Footer = () => {
         </div>
 
         <div className="flex flex-wrap  justify-center text-center text-gray-600 font-regular gap-5 mb-4">
-          <Link href="/">Privacy</Link>
-          <Link href="/">Terms</Link>
-          <Link href="/">About</Link>
+          <Link href="/privacy">Privacy Policy</Link>
+          <Link href="/terms">Terms and Conditions</Link>
+          <Link href="/refund-policy">Refund/Cancellation Policy</Link>
           <Link href="/">Help center</Link>
         </div>
 
