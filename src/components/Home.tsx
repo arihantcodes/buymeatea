@@ -47,7 +47,7 @@ const home = () => {
         <div className="mt-8 mb-6">
           {isAuthenticated ? (
             <Button variant="outline" className="font-bold ml-3" size={"lg"}>
-              <Link href="/dashboard"> Dashboard </Link>
+              <Link href="/me"> Dashboard </Link>
             </Button>
           ) : (
             <>

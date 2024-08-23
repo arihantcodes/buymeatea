@@ -50,7 +50,7 @@ const Page = () => {
 
     try {
       const response = await axios.post("/api/createprofile", formData);
-      router.push("/dashboard");
+      router.push(`/dashboard/${response.data.username}`);
       console.log(response.data);
     } catch (error) {
       console.error("Error creating profile:", error);
@@ -118,3 +118,4 @@ const Page = () => {
 };
 
 export default Page;
+ 

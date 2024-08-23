@@ -83,7 +83,7 @@ const PriNavbar: React.FC = () => {
           ) : (
             <>
               <Button variant="outline" className="font-bold lg:mr-5">
-                <LoginLink postLoginRedirectURL="/dashboard">Sign in</LoginLink>
+                <LoginLink postLoginRedirectURL="/me">Sign in</LoginLink>
               </Button>
               <Button className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3">
                 <RegisterLink postLoginRedirectURL="/welcome">
@@ -166,7 +166,7 @@ const PriNavbar: React.FC = () => {
           ) : (
             <>
               <Button variant="outline" className="font-bold lg:mr-5">
-                <LoginLink postLoginRedirectURL="/dashboard">Sign in</LoginLink>
+                <LoginLink postLoginRedirectURL="/me">Sign in</LoginLink>
               </Button>
               <Button className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3">
                 <RegisterLink postLoginRedirectURL="/welcome">
