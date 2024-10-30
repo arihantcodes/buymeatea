@@ -96,14 +96,7 @@ export default function Component({ params }: { params: { username: string } }) 
       setQrCode(response.data.qrCode)
       setShowQR(true)
 
-      // Log the support intention
-      await axios.post('/api/log-support', {
-        supporter: name,
-        message: message,
-        amount: totalPrice,
-        recipientUsername: username
-      })
-
+     
     } catch (err) {
       console.error('Payment error:', err)
       toast.error("Failed to generate payment QR code")
