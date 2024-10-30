@@ -1,202 +1,313 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-"use client";
-import PriNavbar from "@/components/Prinavbar";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import axios from "axios";
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { Label } from "@/components/ui/label";
-import Script from "next/script";
+'use client'
 
-declare global {
-  interface Window {
-    Razorpay: any;
-  }
-}
+import { useEffect, useState } from "react"
+import Image from "next/image"
+import axios from "axios"
+import { Coffee, Loader2, MessageSquare, Share2, User, QrCode } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Skeleton } from "@/components/ui/skeleton"
+import { toast } from "sonner"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import PriNavbar from "@/components/Navbar"
 
-// Interface for User data
 interface User {
-  username: string;
-  picture: string;
-  bio: string;
-  upiId: string; // Add the 'upiId' property
+  username: string
+  picture: string
+  bio: string
+  upiId: string
 }
 
-const UserProfilePage = ({ params }: { params: { username: string } }) => {
-  const { username } = params;
-  const [user, setUser] = useState<User | null>(null);
-  const [error, setError] = useState<string | null>(null);
+export default function Component({ params }: { params: { username: string } }) {
+  const { username } = params
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [quantity, setQuantity] = useState(1)
+  const [isProcessing, setIsProcessing] = useState(false)
+  const [name, setName] = useState("")
+  const [message, setMessage] = useState("")
+  const [showQR, setShowQR] = useState(false)
+  const [qrCode, setQrCode] = useState("")
+  
+  const pricePerTea = 100
+  const totalPrice = quantity * pricePerTea
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`/api/profile?username=${username}`);
-        setUser(response.data); // Set user data from response
-      } catch (error) {
-        setError("Error fetching user profile");
-        console.error("Error:", error);
+        const response = await axios.get(`/api/profile?username=${username}`)
+        setUser(response.data)
+      } catch (err) {
+        setError("Couldn't load profile. Please try again later.")
+        toast.error("Error loading profile")
+      } finally {
+        setLoading(false)
       }
-    };
+    }
+    fetchUser()
+  }, [username])
 
-    // Call the function to fetch user data
-    fetchUser();
-  }, [username]);
-
-  const [quantity, setQuantity] = useState(1);
-  const pricePerTea = 100;
-  const totalPrice = quantity * pricePerTea;
-  
   const handleQuantityChange = (value: number) => {
-    setQuantity(value);
-  };
+    setQuantity(value)
+  }
 
-  const [isProcessing, setIsProcessing] = useState(false);
+  const generateUPILink = () => {
+    if (!user?.upiId) {
+      toast.error("UPI ID not found")
+      return null
+    }
+
+    // Generate UPI payment link
+    const upiURL = `upi://pay?pa=${user.upiId}&pn=${encodeURIComponent(user.username)}&am=${totalPrice}&cu=INR&tn=${encodeURIComponent(`Support from ${name}: ${message || 'Thank you!'}`)}`;
+    return upiURL
+  }
 
   const handleSubmit = async () => {
-    setIsProcessing(true);
-    try {
-      const response = await axios.post("/api/createorder", {
-        amount: totalPrice,
-        currency: "INR",
-        receipt: `Supporting ${user?.username}`,
-        upiId:  user?.upiId
-      });
-      
-      const data = await response.data;
-      const { id } = response.data;
-      const options = {
-        key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-        amount: totalPrice * 100,
-        currency: "INR",
-        name: "Buy Me a Tea",
-        description: `Supporting ${user?.username}`,
-        image: "/cup2.svg",
-        order_id: id,
-        handler: function (response: any) {
-          console.log("payment succesfull", response);
-        },
-        prefill: {
-          name: "Aman Jain",
-          email: "arihantjain7000@gmail.com",
-        },
-        theme: {
-          color: "#3399cc",
-        },
-      };
-
-      const rzp1 = new window.Razorpay(options);
-      rzp1.open();
-    } catch (error) {
-      console.error("Error creating order:", error);
-    } finally {
-      setIsProcessing(false);
+    if (!name.trim()) {
+      toast.error("Please enter your name")
+      return
     }
-  };
+
+    if (!user?.upiId) {
+      toast.error("Creator's UPI ID not found")
+      return
+    }
+
+    setIsProcessing(true)
+    try {
+      // Generate QR code for UPI payment
+      const upiLink = generateUPILink()
+      if (!upiLink) return
+
+      const response = await axios.post('/api/generate-qr', {
+        upiLink: upiLink
+      })
+
+      setQrCode(response.data.qrCode)
+      setShowQR(true)
+
+      // Log the support intention
+      await axios.post('/api/log-support', {
+        supporter: name,
+        message: message,
+        amount: totalPrice,
+        recipientUsername: username
+      })
+
+    } catch (err) {
+      console.error('Payment error:', err)
+      toast.error("Failed to generate payment QR code")
+    } finally {
+      setIsProcessing(false)
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="container max-w-6xl mx-auto px-4 py-8">
+        <div className="grid md:grid-cols-2 gap-8">
+          <Card>
+            <CardHeader className="space-y-4">
+              <div className="flex items-center space-x-4">
+                <Skeleton className="h-16 w-16 rounded-full" />
+                <Skeleton className="h-8 w-48" />
+              </div>
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-3/4" />
+              </div>
+            </CardHeader>
+          </Card>
+          <Card>
+            <CardHeader>
+              <Skeleton className="h-8 w-48" />
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <Skeleton className="h-10 w-full" />
+              <Skeleton className="h-32 w-full" />
+              <Skeleton className="h-10 w-full" />
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="container max-w-6xl mx-auto px-4 py-8">
+        <Card className="text-center p-8">
+          <CardHeader>
+            <CardTitle className="text-2xl">Oops!</CardTitle>
+            <CardDescription>{error}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button onClick={() => window.location.reload()}>
+              Try Again
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
 
   return (
     <>
-      <div>
-        <Script src="https://checkout.razorpay.com/v1/checkout.js" />
-        <PriNavbar />
-        <div className="grid md:grid-cols-2  md:mt-28">
-          <div className="max-w-sm md:max-w-lg lg:max-w-xl md:mr-16 xl:max-w-2xl mx-auto p-8  rounded-2xl shadow-lg text-black">
-            <div className="flex items-center space-x-4">
-              <Image
-                src={user?.picture || ""}
-                height={100}
-                width={100}
-                alt="profile"
-                className="rounded-full border-4 border-white"
-              />
-              <h1 className="text-2xl md:text-3xl font-bold">
-                {user?.username}
-              </h1>
-            </div>
+    <PriNavbar/>
+      <div className="container max-w-6xl mx-auto px-4 py-8">
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Profile Card */}
+          <Card className="md:sticky md:top-8">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  {user?.picture ? (
+                    <Image
+                      src={user.picture}
+                      alt={user.username}
+                      width={64}
+                      height={64}
+                      className="rounded-full border-4 border-background"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center">
+                      <User className="w-8 h-8 text-muted-foreground" />
+                    </div>
+                  )}
+                  <div>
+                    <CardTitle className="text-2xl">{user?.username}</CardTitle>
+                    <CardDescription>Creator</CardDescription>
+                  </div>
+                </div>
+                <Button variant="ghost" size="icon" onClick={() => {
+                  navigator.share({
+                    title: `Support ${user?.username}`,
+                    url: window.location.href
+                  })
+                }}>
+                  <Share2 className="w-4 h-4" />
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <Label className="text-lg font-semibold">About</Label>
+                  <p className="mt-2 text-muted-foreground">{user?.bio || "No bio yet"}</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
 
-            <div className="mt-6">
-              <Label className="text-lg font-semibold">Bio</Label>
-              <p className="mt-2 text-sm md:text-base">{user?.bio}</p>
-            </div>
-          </div>
-          <div className="max-w-sm md:max-w-lg lg:max-w-xl  md:mt-0 xl:max-w-2xl md:ml-16 mx-auto p-8 bg-white rounded-2xl shadow-lg">
-            <h2 className="text-2xl font-semibold mb-6">Buy Me a Tea</h2>
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center  space-x-2 mr-5">
-                <Image src="/cup2.svg" alt="logo" width={70} height={30} />{" "}
-             
-                <input
-                  type="number"
-                  className="md:w-16  text-center border rounded text-lg "
-                  value={quantity}
-                  onChange={(e) => handleQuantityChange(Number(e.target.value))}
-                  min="1"
-                  max="10"
+          {/* Support Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center space-x-2">
+                <Coffee className="w-5 h-5" />
+                <span>Buy me a tea</span>
+              </CardTitle>
+              <CardDescription>Support my work with a cup of tea</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              {/* Quantity Selector */}
+              <div className="space-y-4">
+                <Label>How many teas?</Label>
+                <div className="flex flex-wrap gap-2">
+                  {[1, 3, 5, 10].map((num) => (
+                    <Button
+                      key={num}
+                      variant={quantity === num ? "default" : "outline"}
+                      onClick={() => handleQuantityChange(num)}
+                      className="flex-1 sm:flex-none"
+                    >
+                      {num} {num === 1 ? 'tea' : 'teas'}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Name Input */}
+              <div className="space-y-2">
+                <Label htmlFor="name">Your name or @social</Label>
+                <Input
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="John Doe or @johndoe"
+                  className="w-full"
                 />
               </div>
-              <div className="space-x-2 w-full ml-5  ">
-                {" "}
-                {/* Increased button spacing */}
-                <Button
-                  onClick={() => handleQuantityChange(1)}
-                  className={`px-4 py-2  rounded-full ${
-                    quantity === 1 ? "" : "bg-gray-200 text-black"
-                  }`}
-                >
-                  1
-                </Button>
-                <Button
-                  onClick={() => handleQuantityChange(3)}
-                  className={`px-4 py-2 rounded-full ${
-                    quantity === 3 ? "" : "bg-gray-200 text-black"
-                  }`}
-                >
-                  3
-                </Button>
-                <Button
-                  onClick={() => handleQuantityChange(5)}
-                  className={`px-4 py-2 rounded-full ${
-                    quantity === 5 ? "" : "bg-gray-200 text-black"
-                  }`}
-                >
-                  5
-                </Button>
-                <Button
-                  onClick={() => handleQuantityChange(10)}
-                  className={`px-4 py-2 rounded-full ${
-                    quantity === 10 ? "" : "bg-gray-200 text-black"
-                  }`}
-                >
-                  10
-                </Button>
+
+              {/* Message Input */}
+              <div className="space-y-2">
+                <Label htmlFor="message" className="flex items-center space-x-2">
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Leave a message (optional)</span>
+                </Label>
+                <Textarea
+                  id="message"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  placeholder="Thanks for your amazing work!"
+                  className="min-h-[100px]"
+                />
               </div>
-            </div>
-            <div className="mb-10">
-              {" "}
-              {/* Increased bottom margin */}
-              <Input
-                type="text"
-                placeholder="Name or @yoursocial"
-                className="w-full p-4 border rounded mb-6 text-lg"
-              />
-              <Textarea
-                placeholder="Say something nice..."
-                className="w-full p-4 border rounded text-lg"
-              />
-            </div>
-            <Button
-              onClick={handleSubmit}
-              disabled={isProcessing}
-              className="w-full py-4 rounded text-lg"
-            >
-              Support ₹{totalPrice}
-            </Button>
-          </div>
+
+              {/* Submit Button */}
+              <Button 
+                className="w-full h-12 text-lg"
+                onClick={handleSubmit}
+                disabled={isProcessing}
+              >
+                {isProcessing ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Processing...
+                  </>
+                ) : (
+                  `Support ₹${totalPrice}`
+                )}
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
-    </>
-  );
-};
 
-export default UserProfilePage;
+      {/* QR Code Dialog */}
+      <Dialog open={showQR} onOpenChange={setShowQR}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Scan to Pay</DialogTitle>
+            <DialogDescription>
+              Scan this QR code with any UPI app to complete your payment of ₹{totalPrice}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex flex-col items-center justify-center p-6">
+            {qrCode && (
+              <Image
+                src={qrCode}
+                alt="Payment QR Code"
+                width={200}
+                height={200}
+                className="rounded-lg"
+              />
+            )}
+            <p className="mt-4 text-sm text-muted-foreground">
+              Payment will be sent to {user?.upiId}
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  )
+}
