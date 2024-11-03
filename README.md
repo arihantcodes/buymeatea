@@ -1,6 +1,6 @@
-# Ek Chai Pilade Platform
+# Buy Me a Tea Platform
 
-Welcome to Ek Chai Pilade, the open-source platform designed to empower content creators by facilitating financial support from their community. This platform offers an array of user-friendly features to make the process seamless for both creators and supporters.
+Welcome to Buy Me A Tea, the open-source platform designed to empower content creators by facilitating financial support from their community. This platform offers an array of user-friendly features to make the process seamless for both creators and supporters.
 
 ## Features
 
@@ -51,5 +51,5 @@ Enable features such as commenting, sharing, and a referral program to enhance c
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/arihantdotcom/ekchaipilade.git
+   git clone https://github.com/arihantdotcom/buymeatea.git
    cd EkChaiPilade
