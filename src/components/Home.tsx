@@ -8,12 +8,11 @@ import Link from "next/link";
 import Donation from "@/components/Donation";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
-import { RegisterLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { SignUpButton } from "@clerk/nextjs";
+import { useUser } from "@clerk/nextjs";
 
 const home = () => {
-  const { isAuthenticated, user, getUser } = useKindeBrowserClient();
-  const alsoUser = getUser();
+  const { isSignedIn, user } = useUser();
 
   return (
     <>
@@ -45,16 +44,16 @@ const home = () => {
           </h3>
         </div>
         <div className="mt-8 mb-6">
-          {isAuthenticated ? (
+          {isSignedIn ? (
             <Button variant="outline" className="font-bold ml-3" size={"lg"}>
               <Link href="/me"> Dashboard </Link>
             </Button>
           ) : (
             <>
               <Button className="font-bold  bg-[#C4822E] text-white ml-3" size={"lg"}>
-                <RegisterLink postLoginRedirectURL="/welcome">
+                <SignUpButton mode="modal">
                   Start Your Stall
-                </RegisterLink>
+                </SignUpButton>
               </Button>
             </>
           )}

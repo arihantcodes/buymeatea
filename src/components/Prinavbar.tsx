@@ -2,13 +2,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
-import {
-  RegisterLink,
-  LoginLink,
-  LogoutLink,
-} from "@kinde-oss/kinde-auth-nextjs/components";
+import { SignInButton, SignUpButton, SignOutButton, useUser } from "@clerk/nextjs";
 import { Button } from "./ui/button";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -20,8 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 const PriNavbar: React.FC = () => {
   const [isopen, setIsopen] = useState(false);
-  const { isAuthenticated, user, getUser } = useKindeBrowserClient();
-  const alsoUser = getUser();
+  const { isSignedIn, user } = useUser();
   const toggleSidebar = () => {
     setIsopen(!isopen);
   };
@@ -38,7 +32,7 @@ const PriNavbar: React.FC = () => {
           </Link>
         </div>
         <div className="lg:mt-2">
-          {isAuthenticated ? (
+          {isSignedIn ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -48,7 +42,7 @@ const PriNavbar: React.FC = () => {
                 >
                   {user && (
                     <Image
-                      src={user.picture ?? ""}
+                      src={user.imageUrl ?? ""}
                       width={86}
                       height={86}
                       alt="Avatar"
@@ -66,19 +60,21 @@ const PriNavbar: React.FC = () => {
                 <DropdownMenuItem>Support</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <LogoutLink>Log out</LogoutLink>
+                  <SignOutButton />
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <>
               <Button variant="outline" className="font-bold lg:mr-5">
-                <LoginLink postLoginRedirectURL="/dashboard">Sign in</LoginLink>
+                <SignInButton mode="modal">
+                  Sign in
+                </SignInButton>
               </Button>
               <Button className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3">
-                <RegisterLink postLoginRedirectURL="/welcome">
+                <SignUpButton mode="modal">
                   Sign up
-                </RegisterLink>
+                </SignUpButton>
               </Button>
             </>
           )}
@@ -121,7 +117,7 @@ const PriNavbar: React.FC = () => {
           )}
         </div>
         <div className="mt-4">
-          {isAuthenticated ? (
+          {isSignedIn ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
@@ -131,7 +127,7 @@ const PriNavbar: React.FC = () => {
                 >
                   {user && (
                     <Image
-                      src={user.picture ?? ""}
+                      src={user.imageUrl ?? ""}
                       width={36}
                       height={36}
                       alt="Avatar"
@@ -149,19 +145,21 @@ const PriNavbar: React.FC = () => {
                 <DropdownMenuItem>Support</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <LogoutLink>Log out</LogoutLink>
+                  <SignOutButton />
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
             <>
               <Button variant="outline" className="font-bold lg:mr-5">
-                <LoginLink postLoginRedirectURL="/dashboard">Sign in</LoginLink>
+                <SignInButton mode="modal">
+                  Sign in
+                </SignInButton>
               </Button>
               <Button className="font-bold lg:mr-5 bg-[#C4822E] text-white p-3">
-                <RegisterLink postLoginRedirectURL="/welcome">
+                <SignUpButton mode="modal">
                   Sign up
-                </RegisterLink>
+                </SignUpButton>
               </Button>
             </>
           )}

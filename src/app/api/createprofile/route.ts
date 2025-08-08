@@ -4,7 +4,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
-  const { email, username, bio, upiId, kindeId, picture } = await req.json();
+  const { email, username, bio, upiId, clerkId, picture } = await req.json();
 
   if (!email || !username || !upiId) {
     return NextResponse.json(
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
         email,
         username,
         bio,
-        kindeId,
+        clerkId,
         upiId,
         picture,
       },

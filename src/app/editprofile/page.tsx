@@ -19,6 +19,14 @@ import {
   ShoppingCart,
   Truck,
   Users2,
+  Edit,
+  Camera,
+  Save,
+  User,
+  Mail,
+  Globe,
+  Heart,
+  Coffee,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -49,6 +57,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Pagination,
   PaginationContent,
@@ -72,169 +81,209 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { SignOutButton } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs/server";
 const Dashboard = async () => {
-  const { getUser } = getKindeServerSession();
-  const user = await getUser();
+  const user = await currentUser();
   
-  const family_name = user?.family_name;
-  const given_name = user?.given_name;
+  const family_name = user?.lastName;
+  const given_name = user?.firstName;
 
-  const full_name = `${given_name} ${family_name}`;
+  const full_name = `${given_name || ''} ${family_name || ''}`.trim();
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
-        <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
-          <Link
-            href="#"
-            className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
-          >
-            <Package2 className="h-4 w-4 transition-all group-hover:scale-110" />
-            <span className="sr-only">Acme Inc</span>
-          </Link>
-        </nav>
-        <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Link
-                  href="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
-                >
-                  <Settings className="h-5 w-5" />
-                  <span className="sr-only">Settings</span>
-                </Link>
-              </TooltipTrigger>
-              <TooltipContent side="right">Settings</TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </nav>
-      </aside>
-      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button size="icon" variant="outline" className="sm:hidden">
-                <PanelLeft className="h-5 w-5" />
-                <span className="sr-only">Toggle Menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="left" className="sm:max-w-xs">
-              <nav className="grid gap-6 text-lg font-medium">
-                <Link
-                  href="#"
-                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
-                >
-                  <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
-                  <span className="sr-only">Acme Inc</span>
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <Home className="h-5 w-5" />
-                  Dashboard
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-foreground"
-                >
-                  <ShoppingCart className="h-5 w-5" />
-                  Orders
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <Package className="h-5 w-5" />
-                  Products
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <Users2 className="h-5 w-5" />
-                  Customers
-                </Link>
-                <Link
-                  href="#"
-                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-                >
-                  <LineChart className="h-5 w-5" />
-                  Settings
-                </Link>
-              </nav>
-            </SheetContent>
-          </Sheet>
-          <Breadcrumb className="hidden md:flex">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/dashboard">Dashboard</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-             
-              <BreadcrumbItem>
-                <BreadcrumbPage>Edit Profile</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-          <div className="relative ml-auto flex-1 md:grow-0"></div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="overflow-hidden rounded-full"
-              >
-                {user && (
-                  <Image
-                    src={user.picture ?? ""}
-                    width={36}
-                    height={36}
-                    alt="Avatar"
-                    className="overflow-hidden rounded-full"
-                  />
-                )}
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <Link href="/editprofile">Profile</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <LogoutLink>Log out</LogoutLink>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </header>
-        <main className="flex justify-center items-center gap-8 p-6 sm:p-8 md:gap-12 lg:grid-cols-3 xl:grid-cols-3 ">
-          <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-6 md:p-8 lg:p-10 xl:p-12">
-            <Image
-              height={120}
-              width={120}
-              alt="profile"
-              className="rounded-full shadow-md"
-              src={user?.picture || ""}
-            />
-            <h1 className="text-2xl font-bold text-gray-800 mt-4 mb-2">
-              {full_name}
-            </h1>
+    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-amber-50">
+      {/* Header */}
+      <div className="bg-white/80 backdrop-blur-sm border-b border-orange-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center space-x-4">
+              <Link href="/" className="flex items-center space-x-2">
+                <div className="w-8 h-8 bg-gradient-to-r from-[#C4822E] to-orange-400 rounded-lg flex items-center justify-center">
+                  <Coffee className="h-5 w-5 text-white" />
+                </div>
+                <span className="font-bold text-xl bg-gradient-to-r from-[#C4822E] to-orange-600 bg-clip-text text-transparent">
+                  Buy Me A Tea
+                </span>
+              </Link>
+            </div>
             
-
-            <Input
-              value={user?.email || ""}
-              className="w-full text-center border border-gray-300 rounded-md px-4 py-2 mt-4 focus:ring-2 focus:ring-indigo-300"
-              placeholder="Enter your email"
-            />
+            <div className="flex items-center space-x-4">
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    className="overflow-hidden rounded-full border-2 border-orange-200 hover:border-[#C4822E] transition-colors"
+                  >
+                    {user && (
+                      <Image
+                        src={user.imageUrl ?? ""}
+                        width={36}
+                        height={36}
+                        alt="Avatar"
+                        className="overflow-hidden rounded-full"
+                      />
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 rounded-xl border-orange-100">
+                  <DropdownMenuLabel className="text-[#C4822E] font-semibold">My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="rounded-lg hover:bg-orange-50">
+                    <Link href="/editprofile" className="flex items-center w-full">
+                      <User className="h-4 w-4 mr-2" />
+                      Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="rounded-lg hover:bg-orange-50">Support</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem className="rounded-lg hover:bg-red-50 text-red-600">
+                    <SignOutButton />
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </div>
           </div>
-        </main>
+        </div>
+      </div>
+            {/* Main Content */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-[#C4822E] to-orange-600 bg-clip-text text-transparent mb-2">
+            Profile Settings
+          </h1>
+          <p className="text-gray-600">Manage your profile and preferences</p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Profile Card */}
+          <div className="lg:col-span-1">
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-orange-100 p-8">
+              <div className="text-center">
+                <div className="relative inline-block mb-6">
+                  <div className="w-32 h-32 bg-gradient-to-r from-[#C4822E] to-orange-400 rounded-full p-1 shadow-lg">
+                    <Image
+                      height={120}
+                      width={120}
+                      alt="profile"
+                      className="rounded-full object-cover"
+                      src={user?.imageUrl || ""}
+                    />
+                  </div>
+                  <button className="absolute bottom-2 right-2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-orange-50 transition-colors border-2 border-orange-200">
+                    <Camera className="h-5 w-5 text-[#C4822E]" />
+                  </button>
+                </div>
+                
+                <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                  {full_name}
+                </h2>
+                <p className="text-gray-500 mb-6">Creator</p>
+                
+                <div className="space-y-3">
+                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+                    <Mail className="h-4 w-4" />
+                    <span>{user?.emailAddresses?.[0]?.emailAddress || "No email"}</span>
+                  </div>
+                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+                    <Globe className="h-4 w-4" />
+                    <span>Public Profile</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Settings Form */}
+          <div className="lg:col-span-2">
+            <div className="bg-white/80 backdrop-blur-sm rounded-3xl shadow-xl border border-orange-100 p-8">
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <Edit className="h-5 w-5 mr-2 text-[#C4822E]" />
+                    Profile Information
+                  </h3>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="firstName" className="text-gray-700 font-medium">First Name</Label>
+                      <Input
+                        id="firstName"
+                        value={user?.firstName || ""}
+                        className="h-12 rounded-xl border-2 border-gray-200 focus:border-[#C4822E] focus:ring-4 focus:ring-orange-100 transition-all duration-200"
+                        placeholder="Enter first name"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="lastName" className="text-gray-700 font-medium">Last Name</Label>
+                      <Input
+                        id="lastName"
+                        value={user?.lastName || ""}
+                        className="h-12 rounded-xl border-2 border-gray-200 focus:border-[#C4822E] focus:ring-4 focus:ring-orange-100 transition-all duration-200"
+                        placeholder="Enter last name"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2 md:col-span-2">
+                      <Label htmlFor="email" className="text-gray-700 font-medium">Email Address</Label>
+                      <Input
+                        id="email"
+                        value={user?.emailAddresses?.[0]?.emailAddress || ""}
+                        className="h-12 rounded-xl border-2 border-gray-200 focus:border-[#C4822E] focus:ring-4 focus:ring-orange-100 transition-all duration-200 bg-gray-50"
+                        placeholder="Enter your email"
+                        readOnly
+                      />
+                      <p className="text-xs text-gray-500">Email is managed by your authentication provider</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-orange-100">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+                    <Heart className="h-5 w-5 mr-2 text-[#C4822E]" />
+                    Donation Settings
+                  </h3>
+                  
+                  <div className="space-y-4">
+                    <div className="bg-gradient-to-r from-orange-50 to-amber-50 rounded-2xl p-6 border border-orange-100">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="font-semibold text-gray-800">Profile Status</h4>
+                          <p className="text-sm text-gray-600">Your profile is visible to donors</p>
+                        </div>
+                        <div className="w-12 h-12 bg-[#C4822E] rounded-full flex items-center justify-center">
+                          <Heart className="h-6 w-6 text-white" />
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h4 className="font-semibold text-gray-800">Ready for Donations</h4>
+                          <p className="text-sm text-gray-600">Your profile is set up and ready to receive donations</p>
+                        </div>
+                        <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                          <span className="text-white font-bold">✓</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-orange-100">
+                  <Button 
+                    className="w-full h-12 bg-gradient-to-r from-[#C4822E] to-orange-500 hover:from-[#B37328] hover:to-orange-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2"
+                  >
+                    <Save className="h-5 w-5" />
+                    Save Changes
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

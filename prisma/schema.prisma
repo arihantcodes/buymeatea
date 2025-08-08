@@ -17,7 +17,7 @@ model UserProfile {
   id        String   @id @default(cuid())
   email     String   @unique
   username  String   @unique
-  kindeId   String?
+  clerkId   String?
   bio       String?
   upiId     String?
   picture   String?

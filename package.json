@@ -10,12 +10,11 @@
     "postinstall": "prisma generate && prisma migrate deploy"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.3.3",
+    "@clerk/nextjs": "^5.7.5",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.3.4",
-    "@kinde-oss/kinde-auth-nextjs": "^2.3.6",
     "@material-tailwind/react": "^2.1.8",
     "@prisma/client": "^5.18.0",
     "@radix-ui/react-accordion": "^1.1.2",
@@ -58,6 +57,7 @@
     "recharts": "^2.10.4",
     "sonner": "^1.5.0",
     "stripe": "^17.3.0",
+    "svix": "^1.71.0",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8",
